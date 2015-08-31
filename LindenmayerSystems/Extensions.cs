@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LindenmayerSystems
 {
+    // Helper functions
     public static class Extensions
     {
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> work)
@@ -16,7 +17,7 @@ namespace LindenmayerSystems
 
         public static T Nest<T>(Func<T, T> f, T x, int n)
         {
-            if (n <= 1)
+            if (n <= 0)
                 return x;
             else
                 return Nest(f, f(x), n - 1);

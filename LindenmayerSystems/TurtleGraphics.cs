@@ -55,8 +55,8 @@ namespace LindenmayerSystems
                 {
                     var oldX = X;
                     var oldY = Y;
-                    X = X + Length * Cos(Angle);
-                    Y = Y + Length * Sin(Angle);
+                    X = X + Length * Cos(Angle); // new x-coordinate
+                    Y = Y + Length * Sin(Angle); // new y-coordinate
                     lines.Add(new Line { X1 = oldX, Y1 = oldY, X2 = X, Y2 = Y });
                 }
                 else if (x == "f")
@@ -75,6 +75,7 @@ namespace LindenmayerSystems
 
             }
 
+            // create boundary box
             var xMin = lines.Min(line => line.X1) - 2.0; 
             var xMax = lines.Max(line => line.X2) + 2.0;
             var yMin = lines.Min(line => line.Y1) - 2.0;
@@ -84,12 +85,9 @@ namespace LindenmayerSystems
 
             using (var graphics = Graphics.FromImage(bmp))
             {
+                var pen = new Pen(new SolidBrush(Color.Black));
                 lines.Select(line => Scale(line, xMin, xMax, yMin, yMax))
-                     .ForEach(line =>
-                     {
-                         var pen = new Pen(new SolidBrush(Color.Black));
-                         graphics.DrawLine(pen, (float)line.X1, (float)line.Y1, (float)line.X2, (float)line.Y2);
-                     });
+                     .ForEach(line => graphics.DrawLine(pen, (float)line.X1, (float)line.Y1, (float)line.X2, (float)line.Y2));
             }
             return bmp;
                  
