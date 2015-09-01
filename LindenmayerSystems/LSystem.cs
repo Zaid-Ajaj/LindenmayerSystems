@@ -13,8 +13,8 @@ namespace LindenmayerSystems
         public Dictionary<string, string> Rules { get; set; } = new Dictionary<string, string>();
         public double AngleDelta { get; set; } = 0.0;
 
-        string FromRule(string symbol) => 
-            Rules.ContainsKey(symbol) ? Rules[symbol] : symbol;
+        string FromRule(string symbol) => Rules.ContainsKey(symbol) ? Rules[symbol] : symbol;
+
 
         string Translate(string symbols)
         {
