@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using static System.Math;
 namespace LindenmayerSystems
 {
-    class TurtleGraphics
+    public class TurtleGraphics
     {
         public double X { get; set; } = 0.0;
         public double Y { get; set; } = 0.0;
@@ -17,6 +17,7 @@ namespace LindenmayerSystems
         public LSystem LSystem { get; set; }
         public int Width { get; set; } = 500;
         public int Height { get; set; } = 500;
+        public Color Color { get; set; } = Color.Black;
         public Bitmap Image { get; set; }
         public Stack<State> States { get; set; } = new Stack<State>();
 
@@ -33,6 +34,8 @@ namespace LindenmayerSystems
             Height = height;
             Image = new Bitmap(Width, Height);
         }
+
+        public TurtleGraphics() { } // no initializer
 
         public Line Scale(Line input, double xMin, double xMax, double yMin, double yMax)
         {
@@ -98,7 +101,7 @@ namespace LindenmayerSystems
 
             using (var graphics = Graphics.FromImage(bmp))
             {
-                var pen = new Pen(new SolidBrush(Color.Black));
+                var pen = new Pen(new SolidBrush(Color));
                 lines.Select(line => Scale(line, xMin, xMax, yMin, yMax))
                      .ForEach(line => graphics.DrawLine(pen, (float)line.X1, (float)line.Y1, (float)line.X2, (float)line.Y2));
             }
@@ -126,11 +129,11 @@ namespace LindenmayerSystems
                 }
                 else if (x == "+")
                 {
-                    Angle -= LSystem.AngleDelta;
+                    Angle -= LSystem.AngleDelta; // turn right
                 }
                 else if(x == "-")
                 {
-                    Angle += LSystem.AngleDelta;
+                    Angle += LSystem.AngleDelta; // turn left
                 }
 
             }
@@ -145,7 +148,7 @@ namespace LindenmayerSystems
 
             using (var graphics = Graphics.FromImage(bmp))
             {
-                var pen = new Pen(new SolidBrush(Color.Black));
+                var pen = new Pen(new SolidBrush(Color));
                 lines.Select(line => Scale(line, xMin, xMax, yMin, yMax))
                      .ForEach(line => graphics.DrawLine(pen, (float)line.X1, (float)line.Y1, (float)line.X2, (float)line.Y2));
             }

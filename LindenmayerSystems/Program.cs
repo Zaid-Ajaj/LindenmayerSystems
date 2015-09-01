@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Console;
 using System.Windows.Forms;
 using static System.Math;
 
@@ -18,7 +13,6 @@ namespace LindenmayerSystems
             var sys = new LSystem() { Start = "F", AngleDelta = PI * (22.0/180.0) };
             sys.Rules.Add("F", "FF-[-F+F+F]+[+F-F-F]");
             var turtle = new TurtleGraphics(sys);
-            turtle.Angle = -(PI / 2.0);
             turtle.Width = 500;
             turtle.Height = 500;
             var bmp = turtle.InterpretBracketed(sys.Generate(4));
