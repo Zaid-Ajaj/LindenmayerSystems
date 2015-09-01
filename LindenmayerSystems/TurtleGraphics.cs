@@ -13,7 +13,7 @@ namespace LindenmayerSystems
         public double X { get; set; } = 0.0;
         public double Y { get; set; } = 0.0;
         public double Length { get; set; } = 1.0;
-        public double Angle { get; set; } = PI / 2.0;
+        public double Angle { get; set; } = 0.0;
         public LSystem LSystem { get; set; }
         public int Width { get; set; } = 500;
         public int Height { get; set; } = 500;
