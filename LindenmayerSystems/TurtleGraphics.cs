@@ -12,7 +12,6 @@ namespace LindenmayerSystems
     {
         public double X { get; set; } = 0.0;
         public double Y { get; set; } = 0.0;
-        public double Length { get; set; } = 1.0;
         public double Angle { get; set; } = 0.0;
         public LSystem LSystem { get; set; }
         public int Width { get; set; } = 500;
@@ -52,36 +51,36 @@ namespace LindenmayerSystems
         public Bitmap InterpretBracketed(string generation)
         {
             var lines = new List<Line>();
-            var xs = generation.Select(x => x.ToString());
-            foreach (var x in xs)
+            var symbols = generation.Select(x => x.ToString());
+            foreach (var sym in symbols)
             {
-                if (x == "F" || x == "G")
+                if (LSystem.Variables.Contains(sym))
                 {
                     var oldX = X;
                     var oldY = Y;
-                    X = X + Length * Cos(Angle); // new x-coordinate
-                    Y = Y + Length * Sin(Angle); // new y-coordinate
+                    X = X + Cos(Angle); // new x-coordinate
+                    Y = Y + Sin(Angle); // new y-coordinate
                     lines.Add(new Line { X1 = oldX, Y1 = oldY, X2 = X, Y2 = Y });
                 }
-                else if (x == "f")
+                else if (sym == "f") // just move -> don't draw
                 {
-                    X = X + Length * Cos(Angle);
-                    Y = Y + Length * Sin(Angle);
+                    X = X + Cos(Angle);
+                    Y = Y + Sin(Angle);
                 }
-                else if (x == "+")
+                else if (sym == "+")
                 {
                     Angle -= LSystem.AngleDelta;
                 }
-                else if (x == "-")
+                else if (sym == "-")
                 {
                     Angle += LSystem.AngleDelta;
                 }
-                else if (x == "[")
+                else if (sym == "[")
                 {
                     var currentState = new State() { X = X, Y = Y, Angle = Angle };
                     States.Push(currentState);
                 }
-                else if(x == "]")
+                else if(sym == "]")
                 {
                     var lastState = States.Pop();
                     X = lastState.X;
@@ -90,14 +89,18 @@ namespace LindenmayerSystems
                 }
 
             }
+            var bmp = new Bitmap(Width, Height);
+
+            if (lines.Count == 0)
+                return bmp;
 
             // create boundary box
-            var xMin = lines.Min(line => line.X1) - 2.0;
-            var xMax = lines.Max(line => line.X2) + 2.0;
+            var xMin = lines.Min(line => line.X1) - 2.0; 
+            var xMax = lines.Max(line => line.X2) + 2.0; 
             var yMin = lines.Min(line => line.Y1) - 2.0;
             var yMax = lines.Max(line => line.Y2) + 2.0;
 
-            var bmp = new Bitmap(Width, Height);
+            
 
             using (var graphics = Graphics.FromImage(bmp))
             {
@@ -118,14 +121,14 @@ namespace LindenmayerSystems
                 {
                     var oldX = X;
                     var oldY = Y;
-                    X = X + Length * Cos(Angle); // new x-coordinate
-                    Y = Y + Length * Sin(Angle); // new y-coordinate
+                    X = X + Cos(Angle); // new x-coordinate
+                    Y = Y + Sin(Angle); // new y-coordinate
                     lines.Add(new Line { X1 = oldX, Y1 = oldY, X2 = X, Y2 = Y });
                 }
                 else if (x == "f")
                 {
-                    X = X + Length * Cos(Angle);
-                    Y = Y + Length * Sin(Angle);
+                    X = X + Cos(Angle);
+                    Y = Y + Sin(Angle);
                 }
                 else if (x == "+")
                 {

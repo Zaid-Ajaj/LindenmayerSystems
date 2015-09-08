@@ -39,6 +39,7 @@
             this.txtAxiom = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.picLSystem = new System.Windows.Forms.PictureBox();
+            this.cboxSystems = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,6 +58,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.cboxSystems);
             this.splitContainer1.Panel1.Controls.Add(this.btnDraw);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.sliderGeneration);
@@ -77,9 +79,9 @@
             // btnDraw
             // 
             this.btnDraw.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDraw.Location = new System.Drawing.Point(353, 8);
+            this.btnDraw.Location = new System.Drawing.Point(353, 39);
             this.btnDraw.Name = "btnDraw";
-            this.btnDraw.Size = new System.Drawing.Size(227, 131);
+            this.btnDraw.Size = new System.Drawing.Size(227, 100);
             this.btnDraw.TabIndex = 8;
             this.btnDraw.Text = "Draw";
             this.btnDraw.UseVisualStyleBackColor = true;
@@ -165,6 +167,14 @@
             this.picLSystem.TabIndex = 0;
             this.picLSystem.TabStop = false;
             // 
+            // cboxSystems
+            // 
+            this.cboxSystems.FormattingEnabled = true;
+            this.cboxSystems.Location = new System.Drawing.Point(353, 13);
+            this.cboxSystems.Name = "cboxSystems";
+            this.cboxSystems.Size = new System.Drawing.Size(227, 21);
+            this.cboxSystems.TabIndex = 9;
+            // 
             // LSystemVisualizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,6 +207,7 @@
         private System.Windows.Forms.Button btnDraw;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox picLSystem;
+        private System.Windows.Forms.ComboBox cboxSystems;
     }
 }
 

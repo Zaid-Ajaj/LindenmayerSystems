@@ -1,0 +1,134 @@
+﻿[
+    {
+        "Name": "Sierpinski Triangle",
+        "Axiom": "A",
+        "Angle": 60,
+        "Variables": [ "A", "B" ],
+        "Rules": [
+            {
+                "From": "A",
+                "To": "+B-A-B+"
+            },
+            {
+                "From": "B",
+                "To": "-A+B+A-"
+            }
+        ]
+    },
+    {
+        "Name": "Pythagoras tree",
+        "Axiom": "X",
+        "Angle": 45,
+        "Variables": [ "X", "Y" ],
+        "Rules": [
+            {
+                "From": "Y",
+                "To": "YY"
+            },
+            {
+                "From": "X",
+                "To": "Y[-X]+X"
+            }
+        ]
+    },
+    {
+        "Name": "Koch curve",
+        "Axiom": "F",
+        "Angle": 90,
+        "Variables": [ "F" ],
+        "Rules": [
+            {
+                "From": "F",
+                "To": "F+F-F-F+F"
+            }
+        ]
+    },
+    {
+        "Name": "Dragon curve",
+        "Axiom": "FX",
+        "Angle": 90,
+        "Variables": [ "F" ],
+        "Rules": [
+            {
+                "From": "X",
+                "To": "X+YF+"
+            },
+            {
+                "From": "Y",
+                "To": "-FX-Y"
+            }
+        ]
+    },
+    {
+        "Name": "Quadratic Koch Island",
+        "Axiom": "F+F+F+F",
+        "Angle": 90,
+        "Variables": [ "F" ],
+        "Rules": [
+            {
+                "From": "F",
+                "To": "F+F-F-FF+F+F-F"
+            }
+        ]
+    },
+    {
+        "Name": "Islands",
+        "Axiom": "F-F-F-F",
+        "Angle": 90,
+        "Variables": [ "F" ],
+        "Rules": [
+            {
+                "From": "F",
+                "To": "F-f+FF-F-FF-Ff-FF+f-FF+F+FF+Ff+FFF"
+            },
+            {
+                "From": "f",
+                "To": "ffffff"
+            }
+        ]
+    },
+    {
+        "Name": "Hexagonal Gosper Curve",
+        "Axiom": "XF",
+        "Angle": 60,
+        "Variables": [ "F" ],
+        "Rules": [
+            {
+                "From": "X",
+                "To": "X+YF++YF-FX--FXFX-YF+"
+            },
+            {
+                "From": "Y",
+                "To": "-FX+YFYF++YF+FX--FX-Y"
+            }
+        ]
+    },
+    {
+        "Name": "Hilbert Curve",
+        "Axiom": "X",
+        "Angle": 90,
+        "Variables": [ "F" ],
+        "Rules": [
+            {
+                "From": "X",
+                "To": "-YF+XFX+FY-"
+            },
+            {
+                "From": "Y",
+                "To": "+XF-YFY-FX+"
+            }
+        ]
+    },
+    {
+        "Name": "Plant",
+        "Axiom": "F",
+        "Angle": 22.5,
+        "Variables": [ "F" ],
+        "Rules": [
+            {
+                "From": "F",
+                "To": "FF+[+F-F-F]-[-F+F+F]"
+            }
+        ]
+    }
+]
