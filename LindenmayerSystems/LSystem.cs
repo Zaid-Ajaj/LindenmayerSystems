@@ -21,6 +21,21 @@ namespace LindenmayerSystems
             return string.Join("", result);
         }
 
-        public string Generate(int n) => Extensions.Nest(Translate, Start, n);
+        public string Generate(int n)
+        {
+            var result = Start;
+            while (n > 0)
+            {
+                result = Translate(result);
+                n--;
+            }
+                
+            return result;
+
+        }
+
+        public string GenerateSlow(int n) => Extensions.Nest(Translate, Start, n);
+
+
     }
 }
