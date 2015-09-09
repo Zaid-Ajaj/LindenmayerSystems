@@ -54,7 +54,7 @@ namespace LindenmayerSystems
             var symbols = generation.Select(x => x.ToString());
             foreach (var sym in symbols)
             {
-                if (LSystem.Variables.Contains(sym))
+                if (LSystem.Variables.Contains(sym)) // variables cause a line to be drawn
                 {
                     var oldX = X;
                     var oldY = Y;
@@ -62,25 +62,25 @@ namespace LindenmayerSystems
                     Y = Y + Sin(Angle); // new y-coordinate
                     lines.Add(new Line { X1 = oldX, Y1 = oldY, X2 = X, Y2 = Y });
                 }
-                else if (sym == "f") // just move -> don't draw
+                else if (sym == "f") // only change state/coordinates -> no line drawn
                 {
                     X = X + Cos(Angle);
                     Y = Y + Sin(Angle);
                 }
-                else if (sym == "+")
+                else if (sym == "+") // turn right
                 {
                     Angle -= LSystem.AngleDelta;
                 }
-                else if (sym == "-")
+                else if (sym == "-") // turn left
                 {
                     Angle += LSystem.AngleDelta;
                 }
-                else if (sym == "[")
+                else if (sym == "[") // push current state
                 {
                     var currentState = new State() { X = X, Y = Y, Angle = Angle };
                     States.Push(currentState);
                 }
-                else if(sym == "]")
+                else if(sym == "]") // retrieved last pushed state
                 {
                     var lastState = States.Pop();
                     X = lastState.X;
@@ -110,55 +110,5 @@ namespace LindenmayerSystems
             }
             return bmp;
         }
-
-        public Bitmap Interpret(string generation)
-        {
-            var lines = new List<Line>();
-            var xs = generation.Select(x => x.ToString());
-            foreach(var x in xs)
-            {
-                if (x == "F" || x == "G")
-                {
-                    var oldX = X;
-                    var oldY = Y;
-                    X = X + Cos(Angle); // new x-coordinate
-                    Y = Y + Sin(Angle); // new y-coordinate
-                    lines.Add(new Line { X1 = oldX, Y1 = oldY, X2 = X, Y2 = Y });
-                }
-                else if (x == "f")
-                {
-                    X = X + Cos(Angle);
-                    Y = Y + Sin(Angle);
-                }
-                else if (x == "+")
-                {
-                    Angle -= LSystem.AngleDelta; // turn right
-                }
-                else if(x == "-")
-                {
-                    Angle += LSystem.AngleDelta; // turn left
-                }
-
-            }
-
-            // create boundary box
-            var xMin = lines.Min(line => line.X1) - 2.0; 
-            var xMax = lines.Max(line => line.X2) + 2.0;
-            var yMin = lines.Min(line => line.Y1) - 2.0;
-            var yMax = lines.Max(line => line.Y2) + 2.0;
-
-            var bmp = new Bitmap(Width, Height);
-
-            using (var graphics = Graphics.FromImage(bmp))
-            {
-                var pen = new Pen(new SolidBrush(Color));
-                lines.Select(line => Scale(line, xMin, xMax, yMin, yMax))
-                     .ForEach(line => graphics.DrawLine(pen, (float)line.X1, (float)line.Y1, (float)line.X2, (float)line.Y2));
-            }
-            return bmp;
-                 
-        }
-
-
     }
 }

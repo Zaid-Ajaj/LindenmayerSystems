@@ -13,9 +13,10 @@ namespace LindenmayerSystemVisualizer
     {
         public static Dictionary<string,LSystem> LoadSystems()
         {
+            // load pre-defined lsystems from file 'lsystems.json'
             var dict = new Dictionary<string, LSystem>();
             var jsonData = File.ReadAllText("lsystems.json");
-            dynamic systems = JsonConvert.DeserializeObject(jsonData);
+            dynamic systems = JsonConvert.DeserializeObject(jsonData); // dynamic makes things easier
             foreach(var sys in systems)
             {
                 var lsystem = new LSystem();

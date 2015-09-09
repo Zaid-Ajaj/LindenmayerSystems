@@ -29,7 +29,6 @@ namespace LindenmayerSystems
                 result = Translate(result);
                 n--;
             }
-                
             return result;
 
         }
