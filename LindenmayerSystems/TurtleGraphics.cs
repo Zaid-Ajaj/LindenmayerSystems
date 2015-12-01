@@ -14,8 +14,8 @@ namespace LindenmayerSystems
         public double Y { get; set; } = 0.0;
         public double Angle { get; set; } = 0.0;
         public LSystem LSystem { get; set; }
-        public int Width { get; set; } = 500;
-        public int Height { get; set; } = 500;
+        public int Width { get; set; } = 800;
+        public int Height { get; set; } = 800;
         public Color Color { get; set; } = Color.Black;
         public Bitmap Image { get; set; }
         public Stack<State> States { get; set; } = new Stack<State>();

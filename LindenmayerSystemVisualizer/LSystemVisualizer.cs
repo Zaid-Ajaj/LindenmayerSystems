@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using LindenmayerSystems;
-using static System.Math;
 
 namespace LindenmayerSystemVisualizer
 {
@@ -16,8 +10,7 @@ namespace LindenmayerSystemVisualizer
     {
         Dictionary<string, LSystem> systems = new Dictionary<string, LSystem>();
         int generation = 0;
-
-
+        
         void Draw()
         {
             var system = systems[cboxSystems.SelectedItem.ToString()];
@@ -28,6 +21,11 @@ namespace LindenmayerSystemVisualizer
         public LSystemVisualizer()
         {
             InitializeComponent();
+            var ctxMenu = new ContextMenu();
+            var menuItem = new MenuItem("Save");
+            menuItem.Click += SavePicture;
+            ctxMenu.MenuItems.Add(menuItem);
+            picLSystem.ContextMenu = ctxMenu;
             systems = Parser.LoadSystems();
             systems.ForEach(sys => cboxSystems.Items.Add(sys.Key));
             cboxSystems.SelectedIndex = 0;
@@ -43,6 +41,16 @@ namespace LindenmayerSystemVisualizer
 
 
 
+        }
+
+        private void SavePicture(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            if(sfd.ShowDialog() == DialogResult.OK)
+            {
+                var bmp = picLSystem.Image as Bitmap;
+                bmp.Save(sfd.FileName + ".png");
+            }
         }
     }
 }

@@ -19,5 +19,13 @@ namespace LindenmayerSystems
             else
                 return Nest(f, f(x), n - 1);
         }
+
+        public static T NestFast<T>(Func<T,T> f, T x, int n)
+        {
+            var result = x;
+            while (n > 0)
+                result = f(result);
+            return result;
+        }
     }
 }

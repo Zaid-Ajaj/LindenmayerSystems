@@ -11,16 +11,18 @@ namespace LindenmayerSystems
         public double AngleDelta { get; set; } = 0.0;
         public List<string> Variables { get; set; } = new List<string>();
 
-
+        // if dict Rules has 'symbol' then give the corresponsing value back, 
+        // otherwise, return the 'symbol' unchanged
         string FromRule(string symbol) => Rules.ContainsKey(symbol) ? Rules[symbol] : symbol;
 
-
+        // apply function 'FromRules' to a list of symbols
         string Translate(string symbols)
         {
             var result = symbols.Select(char.ToString).Select(FromRule);
             return string.Join("", result);
         }
 
+        // generate the nth generation of the system by applying Translate n times;
         public string Generate(int n)
         {
             var result = Start;
@@ -30,7 +32,6 @@ namespace LindenmayerSystems
                 n--;
             }
             return result;
-
         }
 
         public string GenerateSlow(int n) => Extensions.Nest(Translate, Start, n);
